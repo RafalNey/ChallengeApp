@@ -14,7 +14,7 @@ List<Employee> employees = new List<Employee>()
 
 foreach (var employee in employees)
 {
-    for (int i = 1; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         Random random = new Random();
         int randomNumber = random.Next(0, 11);
@@ -32,5 +32,4 @@ foreach (var employee in employees)
         employeeWithMaxResult = employee;
     }
 }
-
 Console.WriteLine(employeeWithMaxResult.Name + ", " + employeeWithMaxResult.Surname + ", lat: " + employeeWithMaxResult.Age + ", suma ocen: " + employeeWithMaxResult.Result);
