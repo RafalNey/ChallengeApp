@@ -1,44 +1,36 @@
-﻿ulong number = 1022033305066077709;
-string numberInString = number.ToString();
-char[] letters = numberInString.ToArray();
-char[] cyfry = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-int[] liczbaCyfr = new int[10];
+﻿using System.Reflection.Metadata;
+using System.Security;
+using ChallengeApp;
 
-foreach (char letter in letters)
+//dodawanie pracownikow
+var employee1 = new Employee("Adam", "Kamizelich", 33);
+var employee2 = new Employee("Rafal", "Ney", 53);
+var employee3 = new Employee("Monika", "Dziewczyna-Ratownika", 18);
+var employee4 = new Employee("Zuzia", "Nieduza", 25);
+
+// przyznawanie losowych punktow pracownikowi (zeby bylo uczciwiej)
+List<Employee> employees = new List<Employee>()
+{ employee1, employee2, employee3, employee4 };
+
+foreach (var employee in employees)
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 1; i < 6; i++)
     {
-        if (letter == cyfry[i]) { liczbaCyfr[i]++; }
+        Random random = new Random();
+        int randomNumber = random.Next(0, 11);
+        employee.AddScore(randomNumber); ;
     }
 }
-Console.WriteLine($"Wyniki dla liczby {number}:");
-for (int i = 0; i < liczbaCyfr.Length; i++)
+// wybor pracownika o najwiekszej sumie punktow
+Employee employeeWithMaxResult = null;
+int maxResult = 0;
+foreach (var employee in employees)
 {
-    Console.WriteLine($"{i} => {liczbaCyfr[i]}");
+    if (employee.Result > maxResult)
+    {
+        maxResult = employee.Result;
+        employeeWithMaxResult = employee;
+    }
 }
 
-
-/*
-
-liczby calkowite
-int myAge1 = int.MaxValue;
-var myAge2 = uint.MaxValue;
-var myAge3 = long.MaxValue;
-var myAge4 = ulong.MaxValue;
-ulong myAge25 = (myAge2 - 1) * (myAge2 - 1);
-
-liczby zmiennoprzecinkowe
-float myAge5 = float.MaxValue;
-double myAge6 = double.MaxValue;
-decimal myAge7 = decimal.MaxValue;
-
-zmienne tekstowe
-string myName = "Rafal";
-char mySymbol = 'N';
-var naLiterki = myName.ToArray();
-
-zmienne logiczne
-bool isActive = true;
-bool isValid = 5 > 4;
-
-*/
+Console.WriteLine(employeeWithMaxResult.Name + ", " + employeeWithMaxResult.Surname + ", lat: " + employeeWithMaxResult.Age + ", suma ocen: " + employeeWithMaxResult.Result);
