@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeApp", "ChallengeApp\ChallengeApp.csproj", "{F2F1C066-72A9-4FA6-AEE6-2FE47ED8E1F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeApp.Tests", "ChallengeApp.Tests\ChallengeApp.Tests.csproj", "{EBF39DCF-C416-4BCD-A22C-FE06E6493C6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{F2F1C066-72A9-4FA6-AEE6-2FE47ED8E1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2F1C066-72A9-4FA6-AEE6-2FE47ED8E1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2F1C066-72A9-4FA6-AEE6-2FE47ED8E1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF39DCF-C416-4BCD-A22C-FE06E6493C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF39DCF-C416-4BCD-A22C-FE06E6493C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF39DCF-C416-4BCD-A22C-FE06E6493C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF39DCF-C416-4BCD-A22C-FE06E6493C6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
