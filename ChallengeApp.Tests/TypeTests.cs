@@ -12,7 +12,7 @@ namespace ChallengeApp.Tests
 
             //asert
             Assert.That(number1, Is.EqualTo(number2));
-            Assert.AreEqual(number1, number2);
+            //Assert.AreEqual(number1, number2);
         }
         [Test]
         public void TypWartosciowyIntNotEqual()
@@ -25,7 +25,7 @@ namespace ChallengeApp.Tests
 
             //asert
             Assert.That(number1, Is.Not.EqualTo(number2));
-            Assert.AreNotEqual(number1, number2);
+            //Assert.AreNotEqual(number1, number2);
         }
         [Test]
         public void TypWartosciowyFloat()
@@ -38,7 +38,7 @@ namespace ChallengeApp.Tests
 
             //asert
             Assert.That(number1, Is.EqualTo(number2));
-            Assert.AreEqual(number1, number2);
+            //Assert.AreEqual(number1, number2);
         }
         [Test]
         public void TypWartosciowyDouble()
@@ -51,7 +51,7 @@ namespace ChallengeApp.Tests
 
             //asert
             Assert.That(number1, Is.EqualTo(number2));
-            Assert.AreEqual(number1, number2);
+            //Assert.AreEqual(number1, number2);
         }
         [Test]
         public void TypImmutableString()
@@ -63,14 +63,14 @@ namespace ChallengeApp.Tests
 
             //asert
             Assert.That(imiePieska, Is.EqualTo(imieKotka));
-            //Assert.AreEqual(user1.Name, imieKotka);
+            //Assert.AreEqual(imiePieska, imieKotka);
         }
         [Test]
-        public void TypReferencyjnyTest1()
+        public void TypReferencyjnyTestImienia()
         {
             // arrange
-            var user1 = GetEmployee("Adam", "Kamizelich", 33);
-            var user2 = GetEmployee("Adam", "Kawal", 70);
+            var user1 = new Employee("Adam", "Kamizelich");
+            var user2 = new Employee("Adam", "Kawal");
 
             //act
 
@@ -79,21 +79,30 @@ namespace ChallengeApp.Tests
             //Assert.AreEqual(user1.Name, user2.Name);
         }
         [Test]
-        public void TypReferencyjnyTest2()
+        public void TypReferencyjnyTestUzytkownika()
         {
             // arrange
-            var user1 = GetEmployee("Adam", "Kamizelich", 33);
-            var user2 = GetEmployee("Adam", "Kamizelich", 33);
+            var user1 = new Employee("Adam", "Kamizelich");
+            var user2 = new Employee("Adam", "Kawal");
 
             //act
 
             //asert
             Assert.That(user1, Is.Not.EqualTo(user2));
-            //Assert.AreNotEqual(user1, user3);
+            //Assert.AreNotEqual(user1, user2);
         }
-        private Employee GetEmployee(string name, string surname, int age)
+        [Test]
+        public void TypReferencyjnyTestUzytkownikaIdentico()
         {
-            return new Employee(name, surname, age);
+            // arrange
+            var user1 = new Employee("Adam", "Kamizelich");
+            var user2 = new Employee("Adam", "Kamizelich");
+
+            //act
+
+            //asert
+            Assert.That(user1, Is.Not.EqualTo(user2));
+            //Assert.AreNotEqual(user1, user2);
         }
     }
 }
