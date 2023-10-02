@@ -15,10 +15,17 @@ foreach (var employee in employees)
     for (int i = 0; i < 5; i++)
     {
         Random random = new Random();
-        float randomNumber = random.Next(0, 11);
+        float randomNumber = random.Next(0, 101);
         employee.AddGrade(randomNumber); ;
     }
 }
+
+employee1.AddGrade("Kalafior");
+employee1.AddGrade("4000");
+employee1.AddGrade("4");
+employee1.AddGrade(40.00000);
+employee1.AddGrade(400000000000000000.00000);
+
 // wylistowanie pracownikow i ich statystyk:
 foreach (var employee in employees)
 {

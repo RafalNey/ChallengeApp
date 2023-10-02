@@ -116,7 +116,7 @@ public class EmployeeTest
         Assert.That(statistics.Average, Is.EqualTo(0));
     }
     [Test]
-    public void AddNegativesToOneEmployee()
+    public void AddNegativesToOneEmployee_AreTheyOmmited()
     {
         // arrange
         var employee = new Employee("Adam", "Kamizelich");
@@ -129,9 +129,25 @@ public class EmployeeTest
         var statistics = employee.GetStatistics();
 
         //asert
-        Assert.That(statistics.Min, Is.EqualTo(-5));
+        Assert.That(statistics.Min, Is.EqualTo(0));
         Assert.That(statistics.Max, Is.EqualTo(5));
-        Assert.That(statistics.Average, Is.EqualTo(0));
+        Assert.That(statistics.Average, Is.EqualTo(2.50));
+    }
+    [Test]
+    public void AverageAsANumberRoundToTwoDecimalPlaces()
+    {
+        // arrange
+        var employee = new Employee("Adam", "Kamizelich");
+
+        //act
+        employee.AddGrade(5);
+        employee.AddGrade(0);
+        employee.AddGrade(5);
+
+        var statistics = employee.GetStatistics();
+
+        //asert
+        Assert.That(Math.Round(statistics.Average, 2), Is.EqualTo(3.33));
     }
     [Test]
     public void WhatIfGradesAreEmpty()
@@ -143,8 +159,82 @@ public class EmployeeTest
         var statistics = employee.GetStatistics();
 
         //asert
-        Assert.That(statistics.Min, Is.EqualTo(float.MaxValue));
-        Assert.That(statistics.Max, Is.EqualTo(float.MinValue));
-        Assert.That(statistics.Average, Is.EqualTo(System.Double.NaN));
+        Assert.That(statistics.Min, Is.EqualTo(0));
+        Assert.That(statistics.Max, Is.EqualTo(0));
+        Assert.That(statistics.Average, Is.EqualTo(0));
+        // Assert.That(statistics.Average, Is.EqualTo(System.Double.NaN));
+    }
+    [Test]
+    public void AddNumbersAsParseStringsToOneEmployee()
+    {
+        // arrange
+        var employee = new Employee("Adam", "Kamizelich");
+
+        //act
+        employee.AddGrade("10");
+        employee.AddGrade("20");
+        employee.AddGrade("30");
+
+        var statistics = employee.GetStatistics();
+
+        //asert
+        Assert.That(statistics.Min, Is.EqualTo(10));
+        Assert.That(statistics.Max, Is.EqualTo(30));
+        Assert.That(statistics.Average, Is.EqualTo(20));
+    }
+    [Test]
+    public void AddUnparsedStringsToOneEmployee()
+    {
+        // arrange
+        var employee = new Employee("Adam", "Kamizelich");
+
+        //act
+        employee.AddGrade("koko");
+        employee.AddGrade("szanel");
+
+        var statistics = employee.GetStatistics();
+
+        //asert
+        Assert.That(statistics.Min, Is.EqualTo(0));
+        Assert.That(statistics.Max, Is.EqualTo(0));
+        Assert.That(statistics.Average, Is.EqualTo(0));
+    }
+    [Test]
+    public void AddNumbersOutOfRangeToOneEmployee()
+    {
+        // arrange
+        var employee = new Employee("Adam", "Kamizelich");
+
+        //act
+        employee.AddGrade(1000);
+        employee.AddGrade(101);
+        employee.AddGrade(10000000000);
+        employee.AddGrade(2);
+
+        var statistics = employee.GetStatistics();
+
+        //asert
+        Assert.That(statistics.Min, Is.EqualTo(2));
+        Assert.That(statistics.Max, Is.EqualTo(2));
+        Assert.That(statistics.Average, Is.EqualTo(2.00));
+    }
+    [Test]
+    public void AddNumbersInDifferentsFormatsToOneEmployee()
+    {
+        // arrange
+        var employee = new Employee("Adam", "Kamizelich");
+
+        //act
+        employee.AddGrade(10.00);
+        employee.AddGrade(5.0009);
+        employee.AddGrade(1);
+        employee.AddGrade(4.0009);
+
+        var statistics = employee.GetStatistics();
+
+        //asert
+        Assert.That(statistics.Min, Is.EqualTo(1));
+        Assert.That(statistics.Max, Is.EqualTo(10));
+        Assert.That(statistics.Average, Is.EqualTo(5.00));
     }
 }
