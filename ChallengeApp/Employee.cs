@@ -21,7 +21,7 @@ namespace ChallengeApp
             float result = (float)grade;
             if (result < 0 || result > 100)
             {
-                Console.WriteLine("Grade should be in the range from 0 to 100.");
+                Console.WriteLine("Ocena liczbowa musi byc z przedzialu od 0 do 100.");
             }
             else
             {
@@ -31,60 +31,63 @@ namespace ChallengeApp
         public void AddGrade(int grade)
         {
             float result = (float)grade;
-            if (result < 0 || result > 100)
-            {
-                Console.WriteLine("Grade should be in the range from 0 to 100.");
-            }
-            else
-            {
-                this.grades.Add(result);
-            }
+            this.AddGrade(result);
         }
         public void AddGrade(long grade)
         {
             float result = (float)grade;
-            if (result < 0 || result > 100)
-            {
-                Console.WriteLine("Grade should be in the range from 0 to 100.");
-            }
-            else
-            {
-                this.grades.Add(result);
-            }
+            this.AddGrade(result);
+        }
+        public void AddGrade(ulong grade)
+        {
+            float result = (float)grade;
+            this.AddGrade(result);
         }
         public void AddGrade(double grade)
         {
             float result = (float)grade;
-            if (result < 0 || result > 100)
-            {
-                Console.WriteLine("Grade should be in the range from 0 to 100.");
-            }
-            else
-            {
-                this.grades.Add(result);
-            }
+            this.AddGrade(result);
         }
+        // Dodawanie punktow przy pomocy literek: A - E.
         public void AddGrade(string grade)
         {
-            if (!float.TryParse(grade, out float result))
+            switch (grade)
             {
-                Console.WriteLine("This string cannot be parse to float.");
-            }
-            else
-            {
-                result = float.Parse(grade);
-                if (result < 0 || result > 100)
-                {
-                    Console.WriteLine("Grade should be in the range from 0 to 100.");
-                }
-                else
-                {
-                    this.grades.Add(result);
-                }
+                case "A":
+                case "a":
+                    this.grades.Add(100);
+                    break;
+                case "B":
+                case "b":
+                    this.grades.Add(80);
+                    break;
+                case "C":
+                case "c":
+                    this.grades.Add(60);
+                    break;
+                case "D":
+                case "d":
+                    this.grades.Add(40);
+                    break;
+                case "E":
+                case "e":
+                    this.grades.Add(20);
+                    break;
+                default:
+                    if (!float.TryParse(grade, out float result))
+                    {
+                        Console.WriteLine("Niewlasciwy ciag znakow. Litery tylko od A do E.");
+                    }
+                    else
+                    {
+                        result = float.Parse(grade);
+                        this.AddGrade(result);
+                    }
+                    break;
             }
         }
 
-        // Wyliczanie max, min oraz sredniej dla pracownika na pierdyliard sposobow
+        // Wyliczanie max, min oraz sredniej dla pracownika
         public Statistics GetStatistics()
         {
             if (grades.Count > 0)
@@ -103,6 +106,25 @@ namespace ChallengeApp
                 }
                 statistics.Average = (float)Math.Round(statistics.Average /= this.grades.Count, 2);
 
+                // zamiana sredniej na literke
+                switch (statistics.Average)
+                {
+                    case var average when average > 80:
+                        statistics.AverageLetter = 'A';
+                        break;
+                    case var average when average > 60:
+                        statistics.AverageLetter = 'B';
+                        break;
+                    case var average when average > 40:
+                        statistics.AverageLetter = 'C';
+                        break;
+                    case var average when average > 20:
+                        statistics.AverageLetter = 'D';
+                        break;
+                    default:
+                        statistics.AverageLetter = 'E';
+                        break;
+                }
                 return statistics;
             }
             else
@@ -112,10 +134,10 @@ namespace ChallengeApp
                 statistics.Average = 0.00f;
                 statistics.Max = 0;
                 statistics.Min = 0;
+                statistics.AverageLetter = 'E';
 
                 return statistics;
             }
         }
-
     }
 }

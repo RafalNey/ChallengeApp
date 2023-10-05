@@ -237,4 +237,82 @@ public class EmployeeTest
         Assert.That(statistics.Max, Is.EqualTo(10));
         Assert.That(statistics.Average, Is.EqualTo(5.00));
     }
+    [Test]
+    public void AddOneLetterToOneEmployee()
+    {
+        // arrange
+        var employee = new Employee("Adam", "Kamizelich");
+
+        //act
+        employee.AddGrade("A");
+
+        var statistics = employee.GetStatistics();
+
+        //asert
+        Assert.That(statistics.Min, Is.EqualTo(100));
+        Assert.That(statistics.Max, Is.EqualTo(100));
+        Assert.That(statistics.Average, Is.EqualTo(100.00));
+    }
+    [Test]
+    public void AddDifferentLettersToOneEmployee()
+    {
+        // arrange
+        var employee = new Employee("Adam", "Kamizelich");
+
+        //act
+        employee.AddGrade("A");
+        employee.AddGrade("a");
+        employee.AddGrade("B");
+        employee.AddGrade("b");
+        employee.AddGrade("C");
+        employee.AddGrade("c");
+        employee.AddGrade("D");
+        employee.AddGrade("d");
+        employee.AddGrade("E");
+        employee.AddGrade("e");
+
+        var statistics = employee.GetStatistics();
+
+        //asert
+        Assert.That(statistics.Min, Is.EqualTo(20));
+        Assert.That(statistics.Max, Is.EqualTo(100));
+        Assert.That(statistics.Average, Is.EqualTo(60.00));
+    }
+    [Test]
+    public void CheckAverageLetterOfOneEmployee()
+    {
+        // arrange
+        var employee = new Employee("Adam", "Kamizelich");
+
+        //act
+        employee.AddGrade("A");
+        employee.AddGrade("e");
+
+        var statistics = employee.GetStatistics();
+
+        //asert
+        Assert.That(statistics.Min, Is.EqualTo(20));
+        Assert.That(statistics.Max, Is.EqualTo(100));
+        Assert.That(statistics.Average, Is.EqualTo(60.00));
+        Assert.That(statistics.AverageLetter == 'C');
+    }
+    [Test]
+    public void CheckAverageLetterOfOneEmployeeMoreComplicated()
+    {
+        // arrange
+        var employee = new Employee("Adam", "Kamizelich");
+
+        //act
+        employee.AddGrade("A");
+        employee.AddGrade("b");
+        employee.AddGrade("c");
+
+        var statistics = employee.GetStatistics();
+
+        //asert
+        Assert.That(statistics.Min, Is.EqualTo(60));
+        Assert.That(statistics.Max, Is.EqualTo(100));
+        Assert.That(statistics.Average, Is.EqualTo(80.00));
+        Assert.That(statistics.AverageLetter == 'B');
+    }
 }
