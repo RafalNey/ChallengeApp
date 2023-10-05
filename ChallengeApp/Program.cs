@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 Console.WriteLine("====================================");
 Console.WriteLine("Witamy w programie oceny pracownikow");
 Console.WriteLine("====================================");
-Console.WriteLine("Skala numeryczna ocen: 0-100, skala literowa A-E.");
-Console.WriteLine("W kazdej chwili mozesz wybrac 'Q' (quit), aby zakonczyc dodawanie ocen.");
+Console.WriteLine("Skala numeryczna ocen: 0-100, skala literowa: A-E.");
+Console.WriteLine("Wybierajac 'Q' (quit), konczysz dodawanie ocen.");
 Console.WriteLine();
 
 var employee = new Employee("Adam", "Kamizelich");

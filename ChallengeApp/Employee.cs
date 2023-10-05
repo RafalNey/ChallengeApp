@@ -55,23 +55,23 @@ namespace ChallengeApp
             {
                 case "A":
                 case "a":
-                    this.grades.Add(100);
+                    this.AddGrade(100);
                     break;
                 case "B":
                 case "b":
-                    this.grades.Add(80);
+                    this.AddGrade(80);
                     break;
                 case "C":
                 case "c":
-                    this.grades.Add(60);
+                    this.AddGrade(60);
                     break;
                 case "D":
                 case "d":
-                    this.grades.Add(40);
+                    this.AddGrade(40);
                     break;
                 case "E":
                 case "e":
-                    this.grades.Add(20);
+                    this.AddGrade(20);
                     break;
                 default:
                     if (!float.TryParse(grade, out float result))
