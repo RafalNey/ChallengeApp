@@ -20,7 +20,14 @@ while (true)
         {
             break;
         }
-        employee.AddGrade(input);
+        try
+        {
+            employee.AddGrade(input);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exeption catched: {e.Message}");
+        }
     }
     else
     {

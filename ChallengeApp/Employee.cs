@@ -15,13 +15,17 @@ namespace ChallengeApp
         // Lista punktow pracownika
         private List<float> grades = new List<float>();
 
+        // Lista dozwolony liter jako punktow
+        public char[] specialLetters = { 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e' };
+        public char[] cyfry = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         // Dodawanie punktow pracownikowi na pierdyliard sposobow. Punkty sa tylko od 0 do 100.
         public void AddGrade(float grade)
         {
             float result = (float)grade;
             if (result < 0 || result > 100)
             {
-                Console.WriteLine("Ocena liczbowa musi byc z przedzialu od 0 do 100.");
+                throw new Exception("Ocena liczbowa musi byc z przedzialu od 0 do 100.");
+                // Console.WriteLine("Ocena liczbowa musi byc z przedzialu od 0 do 100.");
             }
             else
             {
@@ -51,39 +55,49 @@ namespace ChallengeApp
         // Dodawanie punktow przy pomocy literek: A - E.
         public void AddGrade(string grade)
         {
+            if (grade.Length == 1 && specialLetters.Contains(grade[0]))
+            {
+                char result = char.Parse(grade);
+                this.AddGrade(result);
+            }
+            else if (!float.TryParse(grade, out float result))
+            {
+                throw new Exception("Niewlasciwy ciag znakow.");
+                // Console.WriteLine("Niewlasciwy ciag znakow.");
+            }
+            else
+            {
+                result = float.Parse(grade);
+                this.AddGrade(result);
+            }
+        }
+        public void AddGrade(char grade)
+        {
             switch (grade)
             {
-                case "A":
-                case "a":
+                case 'A':
+                case 'a':
                     this.AddGrade(100);
                     break;
-                case "B":
-                case "b":
+                case 'B':
+                case 'b':
                     this.AddGrade(80);
                     break;
-                case "C":
-                case "c":
+                case 'C':
+                case 'c':
                     this.AddGrade(60);
                     break;
-                case "D":
-                case "d":
+                case 'D':
+                case 'd':
                     this.AddGrade(40);
                     break;
-                case "E":
-                case "e":
+                case 'E':
+                case 'e':
                     this.AddGrade(20);
                     break;
                 default:
-                    if (!float.TryParse(grade, out float result))
-                    {
-                        Console.WriteLine("Niewlasciwy ciag znakow. Litery tylko od A do E.");
-                    }
-                    else
-                    {
-                        result = float.Parse(grade);
-                        this.AddGrade(result);
-                    }
-                    break;
+                    throw new Exception("Niewlasciwa litera. Litery tylko od A do E.");
+                    // Console.WriteLine("Niewlasciwy ciag znakow. Litery tylko od A do E.");
             }
         }
 
