@@ -1,23 +1,35 @@
 using System.Runtime.Intrinsics.X86;
 namespace ChallengeApp
 {
-    // klasa Pracownik (imie, nazwisko)
-    public class Employee
+    // klasa Pracownik (imie, nazwisko, plec, wiek)
+    public class Employee : Person
     {
-        public Employee(string name, string surname)
+        public Employee(string name, string surname, string sex, string age)
+        : base(name, surname, sex, age)
         {
-            this.Name = name;
-            this.Surname = surname;
         }
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
+        public Employee(string name, string surname, string sex)
+        : base(name, surname, sex)
+        {
+        }
+        public Employee(string name, string surname)
+        : base(name, surname)
+        {
+        }
+        public Employee(string name)
+        : base(name)
+        {
+        }
+        public Employee()
+        {
+        }
 
         // Lista punktow pracownika
         private List<float> grades = new List<float>();
 
         // Lista dozwolony liter jako punktow
         public char[] specialLetters = { 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e' };
-        public char[] cyfry = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
         // Dodawanie punktow pracownikowi na pierdyliard sposobow. Punkty sa tylko od 0 do 100.
         public void AddGrade(float grade)
         {
@@ -141,7 +153,7 @@ namespace ChallengeApp
                 }
                 return statistics;
             }
-            else
+            else //statystyki dla pracownika bez ocen
             {
                 var statistics = new Statistics();
 
