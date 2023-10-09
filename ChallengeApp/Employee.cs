@@ -2,27 +2,15 @@ using System.Runtime.Intrinsics.X86;
 namespace ChallengeApp
 {
     // klasa Pracownik (imie, nazwisko, plec, wiek)
-    public class Employee : Person
+    public class Employee : IEmployee
     {
-        public Employee(string name, string surname, string sex, string age)
-        : base(name, surname, sex, age)
-        {
-        }
-        public Employee(string name, string surname, string sex)
-        : base(name, surname, sex)
-        {
-        }
         public Employee(string name, string surname)
-        : base(name, surname)
         {
+            this.Name = name; ;
+            this.Surname = surname;
         }
-        public Employee(string name)
-        : base(name)
-        {
-        }
-        public Employee()
-        {
-        }
+        public string Name { get; set; }
+        public string Surname { get; set; }
 
         // Lista punktow pracownika
         private List<float> grades = new List<float>();
@@ -37,7 +25,6 @@ namespace ChallengeApp
             if (result < 0 || result > 100)
             {
                 throw new Exception("Ocena liczbowa musi byc z przedzialu od 0 do 100.");
-                // Console.WriteLine("Ocena liczbowa musi byc z przedzialu od 0 do 100.");
             }
             else
             {
@@ -75,7 +62,6 @@ namespace ChallengeApp
             else if (!float.TryParse(grade, out float result))
             {
                 throw new Exception("Niewlasciwy ciag znakow.");
-                // Console.WriteLine("Niewlasciwy ciag znakow.");
             }
             else
             {
@@ -109,7 +95,6 @@ namespace ChallengeApp
                     break;
                 default:
                     throw new Exception("Niewlasciwa litera. Litery tylko od A do E.");
-                    // Console.WriteLine("Niewlasciwy ciag znakow. Litery tylko od A do E.");
             }
         }
 
