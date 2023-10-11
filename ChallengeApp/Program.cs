@@ -1,6 +1,6 @@
 ﻿using ChallengeApp;
 using System.ComponentModel.DataAnnotations;
-
+/*
 Console.WriteLine("====================================");
 Console.WriteLine("Witamy w programie oceny supervisora");
 Console.WriteLine("====================================");
@@ -38,9 +38,8 @@ while (true)
 var statistics = supervisor.GetStatistics();
 
 Console.WriteLine($"{supervisor.Name} {supervisor.Surname} - max: {statistics.Max:N0}, min: {statistics.Min:N0}, srednia: {statistics.Average:N2} srednia cyferkowa: {statistics.AverageDigit}");
+*/
 
-
-/*
 Console.WriteLine("====================================");
 Console.WriteLine("Witamy w programie oceny pracownikow");
 Console.WriteLine("====================================");
@@ -48,35 +47,45 @@ Console.WriteLine("Skala numeryczna ocen: 0-100, skala literowa: A-E.");
 Console.WriteLine("Wybierajac 'Q' (quit), konczysz dodawanie ocen.");
 Console.WriteLine();
 
-var employee = new Employee("Adam", "Kamizelich");
-//var employee = new Employee();
+var employee = new EmployeeInFile("Adam", "Kamizelich");
+employee.AddGrade(5);
+employee.AddGrade(50);
+employee.AddGrade("D");
+employee.AddGrade(44);
+employee.AddGrade(18);
+employee.AddGrade(11);
+employee.AddGrade("b");
+employee.AddGrade(21);
 
-while (true)
-{
-    Console.WriteLine("Podaj kolejna ocene pracownika: ");
-    var input = Console.ReadLine();
-    if (input != null)
-    {
-        if (input == "q" || input == "Q")
-        {
-            break;
-        }
-        try
-        {
-            employee.AddGrade(input);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Exeption catched: {e.Message}");
-        }
-    }
-    else
-    {
-        input = "0";
-    }
-}
-// wylistowanie pracownika i jego statystyk:
 var statistics = employee.GetStatistics();
 
-Console.WriteLine($"{employee.Name} {employee.Surname}- max: {statistics.Max:N0}, min: {statistics.Min:N0}, srednia: {statistics.Average:N2} srednia literowa: {statistics.AverageLetter}");
-*/
+Console.WriteLine($"{employee.Name} {employee.Surname} - max: {statistics.Max:N0}, min: {statistics.Min:N0}, srednia: {statistics.Average:N2} srednia literowa: {statistics.AverageLetter}");
+
+// while (true)
+// {
+//     Console.WriteLine("Podaj kolejna ocene pracownika: ");
+//     var input = Console.ReadLine();
+//     if (input != null)
+//     {
+//         if (input == "q" || input == "Q")
+//         {
+//             break;
+//         }
+//         try
+//         {
+//             employee.AddGrade(input);
+//         }
+//         catch (Exception e)
+//         {
+//             Console.WriteLine($"Exeption catched: {e.Message}");
+//         }
+//     }
+//     else
+//     {
+//         input = "0";
+//     }
+// }
+// // wylistowanie pracownika i jego statystyk:
+// var statistics = employee.GetStatistics();
+
+// Console.WriteLine($"{employee.Name} {employee.Surname} - max: {statistics.Max:N0}, min: {statistics.Min:N0}, srednia: {statistics.Average:N2} srednia literowa: {statistics.AverageLetter}");

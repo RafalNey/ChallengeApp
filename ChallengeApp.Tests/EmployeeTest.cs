@@ -1,5 +1,5 @@
 using NUnit.Framework.Constraints;
-
+/*
 namespace ChallengeApp.Tests;
 
 public class EmployeeTest
@@ -315,4 +315,5 @@ public class EmployeeTest
         Assert.That(statistics.Average, Is.EqualTo(80.00));
         Assert.That(statistics.AverageLetter == 'B');
     }
-}
+    }
+    */

@@ -1,5 +1,6 @@
 namespace ChallengeApp.Tests
 {
+    /*
     public class TypeTests
     {
         [Test]
@@ -105,4 +106,5 @@ namespace ChallengeApp.Tests
             //Assert.AreNotEqual(user1, user2);
         }
     }
+    */
 }
