@@ -1,23 +1,17 @@
 namespace ChallengeApp
 {
-    public class Supervisor : IEmployee
+    public class Supervisor : EmployeeBase
     {
-        public Supervisor(string name, string surname)
+        public override event GradeAddedDelegate GradeAdded;
+        public Supervisor(string name, string surname) : base(name, surname)
         {
-            this.Name = name; ;
-            this.Surname = surname;
         }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-
         // Lista punktow superwisiora
         private List<float> grades = new List<float>();
-
         // Lista dozwolonych cyfr z plusami i minusami jako punktow
         public string[] specialGrades = { "1", "-1", "1-", "+1", "1+", "2", "-2", "2-", "+2", "2+", "3", "-3", "3-", "+3", "3+", "4", "-4", "4-", "+4", "4+", "5", "-5", "5-", "+5", "5+", "6", "-6", "6-", "+6", "6+" };
-
         // Dodawanie punktow superwisiorowi. Punkty sa tylko od 0 do 100.
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             if (specialGrades.Contains(grade))
             {
@@ -99,7 +93,7 @@ namespace ChallengeApp
                 this.AddGrade(result);
             }
         }
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             float result = (float)grade;
             if (result < 0 || result > 100)
@@ -109,31 +103,34 @@ namespace ChallengeApp
             else
             {
                 this.grades.Add(result);
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
         }
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
             float result = (float)grade;
             this.AddGrade(result);
         }
-        public void AddGrade(long grade)
+        public override void AddGrade(long grade)
         {
             float result = (float)grade;
             this.AddGrade(result);
         }
-        public void AddGrade(ulong grade)
+        public override void AddGrade(ulong grade)
         {
             float result = (float)grade;
             this.AddGrade(result);
         }
-        public void AddGrade(double grade)
+        public override void AddGrade(double grade)
         {
             float result = (float)grade;
             this.AddGrade(result);
         }
-
         // Wyliczanie max, min oraz sredniej dla superwisiora
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             if (grades.Count > 0)
             {
@@ -150,8 +147,7 @@ namespace ChallengeApp
                     statistics.Average += grade;
                 }
                 statistics.Average = (float)Math.Round(statistics.Average /= this.grades.Count, 2);
-
-                // zamiana sredniej na cyferke
+                // Zamiana sredniej na cyferke
                 switch (statistics.Average)
                 {
                     case var average when average == 100:
@@ -208,15 +204,13 @@ namespace ChallengeApp
                 }
                 return statistics;
             }
-            else //statystyki dla superwisiora bez ocen
+            else // Statystyki dla superwisiora bez ocen
             {
                 var statistics = new Statistics();
-
                 statistics.Average = 0.00f;
                 statistics.Max = 0;
                 statistics.Min = 0;
                 statistics.AverageDigit = "1";
-
                 return statistics;
             }
         }

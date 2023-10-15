@@ -2,9 +2,9 @@ namespace ChallengeApp
 {
     public class EmployeeInMemory : EmployeeBase
     {
-        // klasa Pracownik w pamieci (imie, nazwisko)
-        public EmployeeInMemory(string name, string surname)
-        : base(name, surname)
+        public override event GradeAddedDelegate GradeAdded;
+        // Klasa Pracownik w pamieci (imie, nazwisko)
+        public EmployeeInMemory(string name, string surname) : base(name, surname)
         {
         }
         // Lista punktow pracownika
@@ -22,6 +22,10 @@ namespace ChallengeApp
             else
             {
                 this.grades.Add(result);
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
         }
         public override void AddGrade(int grade)

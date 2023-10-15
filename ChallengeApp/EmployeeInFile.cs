@@ -2,7 +2,8 @@ namespace ChallengeApp
 {
     public class EmployeeInFile : EmployeeBase
     {
-        //nazwa pliku z danymi 
+        public override event GradeAddedDelegate GradeAdded;
+        // Nazwa pliku z danymi 
         private const string fileName = "grades.txt";
         public EmployeeInFile(string name, string surname) : base(name, surname)
         {
@@ -21,6 +22,10 @@ namespace ChallengeApp
                 using (var writer = File.AppendText(fileName))
                 {
                     writer.WriteLine(grade);
+                    if (GradeAdded != null)
+                    {
+                        GradeAdded(this, new EventArgs());
+                    }
                 }
             }
         }
@@ -97,7 +102,6 @@ namespace ChallengeApp
             var results = this.CountStatistics(gradesFromFile);
             return results;
         }
-
         private List<float> ReadGradesFromFile()
         {
             var grades = new List<float>();
@@ -111,6 +115,11 @@ namespace ChallengeApp
                         var grade = float.Parse(line);
                         grades.Add(grade);
                         line = reader.ReadLine();
+                        if (GradeAdded != null)
+                        {
+                            GradeAdded(this, new EventArgs());
+                        }
+
                     }
                 }
             }
@@ -136,7 +145,7 @@ namespace ChallengeApp
                     statistics.Average += grade;
                 }
                 statistics.Average = (float)Math.Round(statistics.Average /= grades.Count, 2);
-                // zamiana sredniej na literke
+                // Zamiana sredniej na literke
                 switch (statistics.Average)
                 {
                     case var average when average > 80:
@@ -155,18 +164,15 @@ namespace ChallengeApp
                         statistics.AverageLetter = 'E';
                         break;
                 }
-
                 return statistics;
             }
-            else //statystyki dla pracownika bez ocen
+            else // Statystyki dla pracownika bez ocen
             {
                 var statistics = new Statistics();
-
                 statistics.Average = 0.00f;
                 statistics.Max = 0;
                 statistics.Min = 0;
                 statistics.AverageLetter = 'E';
-
                 return statistics;
             }
         }
