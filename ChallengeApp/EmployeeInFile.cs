@@ -2,14 +2,14 @@ namespace ChallengeApp
 {
     public class EmployeeInFile : EmployeeBase
     {
-        public override event GradeAddedDelegate GradeAdded;
+        public override event GradeAddedDelegate? GradeAdded;
         // Nazwa pliku z danymi 
         private const string fileName = "grades.txt";
+        // Lista dozwolonych liter jako punktow
+        public char[] specialLetters = { 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e' };
         public EmployeeInFile(string name, string surname) : base(name, surname)
         {
         }
-        // Lista dozwolonych liter jako punktow
-        public char[] specialLetters = { 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e' };
         public override void AddGrade(float grade)
         {
             float result = (float)grade;
@@ -119,7 +119,6 @@ namespace ChallengeApp
                         {
                             GradeAdded(this, new EventArgs());
                         }
-
                     }
                 }
             }
@@ -131,50 +130,13 @@ namespace ChallengeApp
         }
         private Statistics CountStatistics(List<float> grades)
         {
-            if (grades.Count > 0)
-            {
-                var statistics = new Statistics();
-                statistics.Average = 0.00f;
-                statistics.Max = float.MinValue;
-                statistics.Min = float.MaxValue;
+            var statistics = new Statistics();
 
-                foreach (var grade in grades)
-                {
-                    statistics.Max = Math.Max(statistics.Max, grade);
-                    statistics.Min = Math.Min(statistics.Min, grade);
-                    statistics.Average += grade;
-                }
-                statistics.Average = (float)Math.Round(statistics.Average /= grades.Count, 2);
-                // Zamiana sredniej na literke
-                switch (statistics.Average)
-                {
-                    case var average when average > 80:
-                        statistics.AverageLetter = 'A';
-                        break;
-                    case var average when average > 60:
-                        statistics.AverageLetter = 'B';
-                        break;
-                    case var average when average > 40:
-                        statistics.AverageLetter = 'C';
-                        break;
-                    case var average when average > 20:
-                        statistics.AverageLetter = 'D';
-                        break;
-                    default:
-                        statistics.AverageLetter = 'E';
-                        break;
-                }
-                return statistics;
-            }
-            else // Statystyki dla pracownika bez ocen
+            foreach (var grade in grades)
             {
-                var statistics = new Statistics();
-                statistics.Average = 0.00f;
-                statistics.Max = 0;
-                statistics.Min = 0;
-                statistics.AverageLetter = 'E';
-                return statistics;
+                statistics.AddGrade(grade);
             }
+            return statistics;
         }
     }
 }

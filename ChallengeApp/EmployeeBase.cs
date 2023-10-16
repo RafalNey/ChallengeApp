@@ -4,7 +4,7 @@ namespace ChallengeApp
     {
         // Delegatura
         public delegate void GradeAddedDelegate(object sender, EventArgs args);
-        public abstract event GradeAddedDelegate GradeAdded;
+        public virtual event GradeAddedDelegate? GradeAdded;
 
         // Szablon pracownika
         public EmployeeBase(string name, string surname)
@@ -14,6 +14,7 @@ namespace ChallengeApp
         }
         public string Name { get; private set; }
         public string Surname { get; private set; }
+
         // Abstrakcyjne wydmuszki do liczenia punktow
         public abstract void AddGrade(float grade);
         public abstract void AddGrade(int grade);
@@ -21,6 +22,7 @@ namespace ChallengeApp
         public abstract void AddGrade(ulong grade);
         public abstract void AddGrade(double grade);
         public abstract void AddGrade(string grade);
+
         // Statystyki z pliku Statistics
         public abstract Statistics GetStatistics();
     }
